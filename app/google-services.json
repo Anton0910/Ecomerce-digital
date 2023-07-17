@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "637868225317",
+    "project_id": "ecomerce-c472f",
+    "storage_bucket": "ecomerce-c472f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637868225317:android:5131e1e0620b03fdd760cc",
+        "android_client_info": {
+          "package_name": "devandroid.antonio.e_comerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637868225317-fgv280ugn8k84h4l79octi5e9t0fv918.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "devandroid.antonio.e_comerce",
+            "certificate_hash": "2c7c2fda8e3d3956019f9b0d6e9168f68ea5535b"
+          }
+        },
+        {
+          "client_id": "637868225317-f4a64qmmshr504k4sakouol1d005k266.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyhyAOCAWlPAGFqpVT0GEQU-j8GaF2NBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637868225317-f4a64qmmshr504k4sakouol1d005k266.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
