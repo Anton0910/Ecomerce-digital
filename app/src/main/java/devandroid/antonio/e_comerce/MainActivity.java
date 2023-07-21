@@ -2,9 +2,11 @@ package devandroid.antonio.e_comerce;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import devandroid.antonio.e_comerce.autentication.LoginActivity;
 import devandroid.antonio.e_comerce.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        binding.textInfo.setText("Texto alterado");
+
+        binding.btnLogin.setOnClickListener(view1 -> {
+            startActivity(new Intent(this, LoginActivity.class));
+        });
+
     }
 }
