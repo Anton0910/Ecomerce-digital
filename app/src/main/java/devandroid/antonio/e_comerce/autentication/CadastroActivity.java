@@ -111,7 +111,10 @@ public class CadastroActivity extends AppCompatActivity {
                           String id = task.getResult().getUser().getUid();
                           usuario.setId(id);
                           usuario.salvar();
-
+                          Intent intent = new Intent();
+                          intent.putExtra("email",usuario.getEmail());
+                          setResult(RESULT_OK,intent);
+                          finish();
                         } else {
                            Toast.makeText(this,
                                    FirebaseHelper.validaErros(task.getException().getMessage()),

@@ -2,7 +2,10 @@ package devandroid.antonio.e_comerce.autentication;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -25,6 +28,14 @@ import devandroid.antonio.e_comerce.helper.FirebaseHelper;
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
 
+    private ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                String email = result.getData().getStringExtra("email");
+                binding.editEmail.setText(email);
+            }
+    );
+
     String email;
 
     String password;
@@ -45,14 +56,10 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, RecuperarsenhaActivity.class));
         });
         binding.textView2.setOnClickListener(view -> {
-            startActivity(new Intent(this, CadastroActivity.class));
+            Intent intent = new Intent(this,CadastroActivity.class);
+            resultLauncher.launch(intent);
         });
     }
-
-
-
-
-
 
 
 
