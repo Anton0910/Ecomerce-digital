@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph_usuario">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_usuario"
+    app:startDestination="@id/menu_home">
 
+    <fragment
+        android:id="@+id/menu_home"
+        android:name="devandroid.antonio.e_comerce.fragment.usuario.UsuarioHomeFragment"
+        android:label="fragment_usuario_home"
+        tools:layout="@layout/fragment_usuario_home" />
+    <fragment
+        android:id="@+id/menu_pedido"
+        android:name="devandroid.antonio.e_comerce.fragment.usuario.UsuarioPedidosFragment"
+        android:label="fragment_usuario_pedidos"
+        tools:layout="@layout/fragment_usuario_pedidos" />
+    <fragment
+        android:id="@+id/menu_carrinho"
+        android:name="devandroid.antonio.e_comerce.fragment.usuario.UsuarioCarrinhoFragment"
+        android:label="fragment_usuario_carrinho"
+        tools:layout="@layout/fragment_usuario_carrinho" />
+    <fragment
+        android:id="@+id/menu_favoritos"
+        android:name="devandroid.antonio.e_comerce.fragment.usuario.UsuarioFavoritosFragment"
+        android:label="fragment_usuario_favoritos"
+        tools:layout="@layout/fragment_usuario_favoritos" />
+    <fragment
+        android:id="@+id/menu_perfil"
+        android:name="devandroid.antonio.e_comerce.fragment.usuario.UsuarioPerfilFragment"
+        android:label="fragment_usuario_perfil"
+        tools:layout="@layout/fragment_usuario_perfil" />
 </navigation>

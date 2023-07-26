@@ -32,7 +32,15 @@ public class MainActivityUsuario extends AppCompatActivity {
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(binding.BottomNavigationView ,navController);
-
+        binding.buttonLogin.setOnClickListener(view1 -> {
+            if(FirebaseHelper.getAutenticado()){
+                FirebaseHelper.getAuth().signOut();
+                Toast.makeText(this,"Usuário já autenticado!",Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this,"Usuário não autenticado!",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, LoginActivity.class));
+            }
+        });
 
 
     }
