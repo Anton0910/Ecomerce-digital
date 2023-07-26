@@ -1,13 +1,12 @@
-package devandroid.antonio.e_comerce.activity;
+package devandroid.antonio.e_comerce.activity.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 
-import devandroid.antonio.e_comerce.MainActivity;
+import devandroid.antonio.e_comerce.activity.usuario.MainActivityUsuario;
 import devandroid.antonio.e_comerce.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -19,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
 
         new Handler(getMainLooper()).postDelayed(()->{
             finish();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainActivityUsuario.class));
         },3000);
 
     }
