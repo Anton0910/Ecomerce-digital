@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import devandroid.antonio.e_comerce.autentication.LoginActivity;
 import devandroid.antonio.e_comerce.databinding.ActivityMainBinding;
+import devandroid.antonio.e_comerce.helper.FirebaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +24,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(view);
 
         binding.btnLogin.setOnClickListener(view1 -> {
-            startActivity(new Intent(this, LoginActivity.class));
+           if(FirebaseHelper.getAutenticado()){
+               FirebaseHelper.getAuth().signOut();
+               Toast.makeText(this,"Usuário já autenticado!",Toast.LENGTH_SHORT).show();
+           }else {
+               Toast.makeText(this,"Usuário não autenticado!",Toast.LENGTH_SHORT).show();
+               startActivity(new Intent(this, LoginActivity.class));
+           }
         });
 
     }
