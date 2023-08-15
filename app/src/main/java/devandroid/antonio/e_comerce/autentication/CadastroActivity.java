@@ -20,6 +20,7 @@ import devandroid.antonio.e_comerce.R;
 import devandroid.antonio.e_comerce.databinding.ActivityCadastroBinding;
 import devandroid.antonio.e_comerce.databinding.ActivityLoginBinding;
 import devandroid.antonio.e_comerce.helper.FirebaseHelper;
+import devandroid.antonio.e_comerce.model.Loja;
 import devandroid.antonio.e_comerce.model.Usuario;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -70,11 +71,16 @@ public class CadastroActivity extends AppCompatActivity {
                         if (!confirmPassword.isEmpty()){
 
                             if (password.equals(confirmPassword)){
-                                Usuario usuario = new Usuario();
-                                usuario.setNome(nome);
-                                usuario.setEmail(email);
-                                usuario.setSenha(password);
-                                criarConta(usuario);
+                                Loja loja = new Loja();
+                                loja.setNome(nome);
+                                loja.setEmail(email);
+                                loja.setSenha(password);
+                                criarLoja(loja);
+//                                Usuario usuario = new Usuario();
+//                                usuario.setNome(nome);
+//                                usuario.setEmail(email);
+//                                usuario.setSenha(password);
+//                                criarConta(usuario);
 
                             }else {
                                 binding.editConfirmSenha.requestFocus();
@@ -120,6 +126,24 @@ public class CadastroActivity extends AppCompatActivity {
                                    FirebaseHelper.validaErros(task.getException().getMessage()),
                                    Toast.LENGTH_SHORT).show();
                         }
+                });
+
+    }
+
+    public void criarLoja(Loja loja){
+        FirebaseHelper.getAuth().createUserWithEmailAndPassword(loja.getEmail(), loja.getSenha())
+                .addOnCompleteListener(task ->  {
+                    if (task.isSuccessful()) {
+                        String id = task.getResult().getUser().getUid();
+                        loja.setId(id);
+                        loja.salvar();
+                        finish();
+
+                    } else {
+                        Toast.makeText(this,
+                                FirebaseHelper.validaErros(task.getException().getMessage()),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 });
 
     }

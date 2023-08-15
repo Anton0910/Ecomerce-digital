@@ -4,24 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/neve"
-    tools:context=".activity.usuario.MainActivityUsuario">
+    tools:context=".activity.loja.MainActivityEmpresa">
 
 
     <androidx.fragment.app.FragmentContainerView
-
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/BottomNavigationView"
+        android:layout_height="500dp"
+        app:defaultNavHost = "true"
+        app:navGraph="@navigation/nav_graph_empresa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph_usuario"
-        />
+        tools:layout="@layout/fragment_usuario_home" />
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/BottomNavigationView"
@@ -29,7 +27,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/menu_usuario"
+        app:menu="@menu/menu_loja"
         app:itemTextColor="@drawable/item_selected"
         app:itemIconTint="@drawable/item_selected"
         app:layout_constraintBottom_toBottomOf="parent"

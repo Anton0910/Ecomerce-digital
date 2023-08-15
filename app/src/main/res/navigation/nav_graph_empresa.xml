@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_empresa"
+    app:startDestination="@id/menu_home">
+
+    <fragment
+        android:id="@+id/menu_categorias"
+        android:name="devandroid.antonio.e_comerce.fragment.loja.EmpresaCategoriaFragment"
+        android:label="fragment_empresa_categoria"
+        tools:layout="@layout/fragment_empresa_categoria" />
+    <fragment
+        android:id="@+id/menu_config"
+        android:name="devandroid.antonio.e_comerce.fragment.loja.EmpresaConfiguracaoFragment"
+        android:label="fragment_empresa_configuracao"
+        tools:layout="@layout/fragment_empresa_configuracao" />
+    <fragment
+        android:id="@+id/menu_pedidos"
+        android:name="devandroid.antonio.e_comerce.fragment.loja.EmpresaPedidosFragment"
+        android:label="fragment_empresa_pedidos"
+        tools:layout="@layout/fragment_empresa_pedidos" />
+    <fragment
+        android:id="@+id/menu_produtos"
+        android:name="devandroid.antonio.e_comerce.fragment.loja.EmpresaProdutosFragment"
+        android:label="fragment_empresa_produtos"
+        tools:layout="@layout/fragment_empresa_produtos" />
+</navigation>

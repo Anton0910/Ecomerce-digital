@@ -27,11 +27,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 
 import devandroid.antonio.e_comerce.R;
 
+import devandroid.antonio.e_comerce.activity.loja.MainActivityEmpresa;
+import devandroid.antonio.e_comerce.activity.usuario.MainActivityUsuario;
 import devandroid.antonio.e_comerce.databinding.ActivityLoginBinding;
 import devandroid.antonio.e_comerce.helper.FirebaseHelper;
 import devandroid.antonio.e_comerce.model.Usuario;
@@ -84,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseHelper.getAuth().signInWithEmailAndPassword(email,senha)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
+                        recuperaUsuario(task.getResult().getUser().getUid());
                         finish();
                     }else{
                         binding.progressBar.setVisibility(View.GONE);
@@ -92,6 +98,30 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void recuperaUsuario(String id){
+        DatabaseReference usuarioref = FirebaseHelper.getDatabaseReference()
+                .child("usuarios")
+                .child(id);
+        usuarioref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){// Usuario
+                    finish();
+                    startActivity(new Intent(getBaseContext(), MainActivityUsuario.class));
+                }else{// Loja
+                    finish();
+                    startActivity(new Intent(getBaseContext(), MainActivityEmpresa.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     public void validaDados(){
