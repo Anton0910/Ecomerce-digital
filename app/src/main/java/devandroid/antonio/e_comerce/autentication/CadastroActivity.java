@@ -71,16 +71,12 @@ public class CadastroActivity extends AppCompatActivity {
                         if (!confirmPassword.isEmpty()){
 
                             if (password.equals(confirmPassword)){
-                                Loja loja = new Loja();
-                                loja.setNome(nome);
-                                loja.setEmail(email);
-                                loja.setSenha(password);
-                                criarLoja(loja);
-//                                Usuario usuario = new Usuario();
-//                                usuario.setNome(nome);
-//                                usuario.setEmail(email);
-//                                usuario.setSenha(password);
-//                                criarConta(usuario);
+
+                                Usuario usuario = new Usuario();
+                                usuario.setNome(nome);
+                                usuario.setEmail(email);
+                                usuario.setSenha(password);
+                                criarConta(usuario);
 
                             }else {
                                 binding.editConfirmSenha.requestFocus();

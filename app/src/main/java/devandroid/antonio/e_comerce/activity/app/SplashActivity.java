@@ -29,12 +29,9 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void verificaAcesso(){
-        if(FirebaseHelper.getAutenticado()){
-            recuperaAcesso();
-        }else {
-            finish();
+
             startActivity(new Intent(this, MainActivityUsuario.class));
-        }
+
     }
 
     private void recuperaAcesso() {
