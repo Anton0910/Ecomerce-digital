@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_laranja">#F1683C</color>
     <color name="color_cinza">#E4E4E4</color>
-    <color name="neve">#fffafa</color>
+    <color name="color_laranja">#FC6E20</color>
+    <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
@@ -11,4 +11,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorIconeOnBnv">#FC6E20</color>
     <color name="colorIconeOffBnv">#A59D98</color>
+    <color name="color_verde">#50A85C</color>
+    <color name="neve">#fffafa</color>
 </resources>

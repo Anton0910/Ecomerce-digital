@@ -18,10 +18,12 @@ public class MainActivityEmpresa extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_empresa);
+
         binding = ActivityMainEmpresaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         NavHostFragment navHostFragment =
-                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_empresa);
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(binding.BottomNavigationView ,navController);
     }

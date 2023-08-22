@@ -37,6 +37,7 @@ import devandroid.antonio.e_comerce.R;
 
 import devandroid.antonio.e_comerce.activity.loja.MainActivityEmpresa;
 import devandroid.antonio.e_comerce.activity.usuario.MainActivityUsuario;
+
 import devandroid.antonio.e_comerce.databinding.ActivityLoginBinding;
 import devandroid.antonio.e_comerce.helper.FirebaseHelper;
 import devandroid.antonio.e_comerce.model.Usuario;
@@ -108,12 +109,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){// Usuario
-                    finish();
+
                     startActivity(new Intent(getBaseContext(), MainActivityUsuario.class));
                 }else{// Loja
-                    finish();
                     startActivity(new Intent(getBaseContext(), MainActivityEmpresa.class));
                 }
+                finish();
             }
 
             @Override

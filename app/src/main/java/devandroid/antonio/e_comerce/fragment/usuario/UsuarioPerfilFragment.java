@@ -32,10 +32,8 @@ public class UsuarioPerfilFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        binding.button.setOnClickListener(view1 -> {
-//            if(!FirebaseHelper.getAutenticado()){
-//                startActivity(new Intent(getActivity(), LoginActivity.class));
-//            }
-//        });
+        binding.button.setOnClickListener(view1 -> {
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+        });
     }
 }
