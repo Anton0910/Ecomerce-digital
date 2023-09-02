@@ -30,7 +30,9 @@ public class SplashActivity extends AppCompatActivity {
 
     private void verificaAcesso(){
 
-            startActivity(new Intent(this, MainActivityEmpresa.class));
+            finish();
+            startActivity(new Intent(this, MainActivityUsuario.class));
+
 
     }
 

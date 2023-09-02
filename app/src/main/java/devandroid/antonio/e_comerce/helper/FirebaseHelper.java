@@ -1,10 +1,20 @@
 package devandroid.antonio.e_comerce.helper;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.ByteArrayOutputStream;
 
 public class FirebaseHelper {
 
@@ -12,12 +22,17 @@ public class FirebaseHelper {
     private static DatabaseReference databaseReference;
     private static StorageReference storageReference;
 
+
     public static StorageReference getStorageReference(){
         if(storageReference == null){
             storageReference = FirebaseStorage.getInstance().getReference();
         }
         return storageReference;
     }
+
+
+
+
 
     public static String getIdFirebase(){
         return getAuth().getUid();

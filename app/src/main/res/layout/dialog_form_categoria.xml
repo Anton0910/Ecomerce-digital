@@ -36,6 +36,7 @@
         android:layout_marginTop="48dp"
         android:backgroundTint="@color/black"
         android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:hint="Ex Calçados"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.562"

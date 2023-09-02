@@ -3,6 +3,7 @@ package devandroid.antonio.e_comerce.fragment.loja;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,9 +24,12 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 
@@ -39,6 +43,8 @@ import devandroid.antonio.e_comerce.autentication.LoginActivity;
 import devandroid.antonio.e_comerce.databinding.DialogFormCategoriaBinding;
 import devandroid.antonio.e_comerce.databinding.FragmentEmpresaCategoriaBinding;
 import devandroid.antonio.e_comerce.databinding.FragmentUsuarioPerfilBinding;
+import devandroid.antonio.e_comerce.helper.FirebaseHelper;
+import devandroid.antonio.e_comerce.model.Categoria;
 
 
 public class EmpresaCategoriaFragment extends Fragment {
@@ -49,11 +55,13 @@ public class EmpresaCategoriaFragment extends Fragment {
 
     private  DialogFormCategoriaBinding categoriaBinding;
 
+    private Categoria categoria;
+
 
     private static final String READ_EXTERNAL_STORAGE = Manifest.permission.READ_EXTERNAL_STORAGE;
     private String caminhoImagem = null;
 
-    private  Bitmap bitmap;
+
     private ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -63,13 +71,15 @@ public class EmpresaCategoriaFragment extends Fragment {
                      caminhoImagem = imagemSelecionada.toString();
 
                      try{
+                         Bitmap  bitmap;
                          if (Build.VERSION.SDK_INT<28){
-                             bitmap =
+                                bitmap =
                                      MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imagemSelecionada);
                          }else {
                              ImageDecoder.Source source =
                                      ImageDecoder.createSource(getActivity().getContentResolver()
                                              ,imagemSelecionada);
+                              bitmap = ImageDecoder.decodeBitmap(source);
                          }
                          categoriaBinding.imagemCategoria.setImageBitmap(bitmap);
                      }catch (Exception e){
@@ -107,8 +117,7 @@ public class EmpresaCategoriaFragment extends Fragment {
                 R.style.CustomAlertDialog);
 
 
-         categoriaBinding =
-                DialogFormCategoriaBinding.inflate(LayoutInflater.from(getContext()));
+         categoriaBinding = DialogFormCategoriaBinding.inflate(LayoutInflater.from(getContext()));
 
         biulder.setView(categoriaBinding.getRoot());
 
@@ -117,7 +126,24 @@ public class EmpresaCategoriaFragment extends Fragment {
         });
 
         categoriaBinding.btnSalvar.setOnClickListener(v -> {
-            alertDialog.dismiss();
+            if (categoriaBinding.edtCategoria.getText().toString().isEmpty()){
+                categoriaBinding.edtCategoria.requestFocus();
+                categoriaBinding.edtCategoria.setError("Digite algum produto!");
+
+            }else if (caminhoImagem == null){
+                ocultaTeclado();
+                Toast.makeText(getContext(),"Selecione uma imagem para a categoria!",
+                        Toast.LENGTH_SHORT).show();
+            }else {
+                if (categoria == null){
+                    categoria = new Categoria();
+                }
+                categoria.setNome(categoriaBinding.edtCategoria.getText().toString());
+                categoria.setTodas(categoriaBinding.cbTodos.isChecked());
+                salvarImagemFirebase();
+
+            }
+
         });
 
         categoriaBinding.imagemCategoria.setOnClickListener(view -> {
@@ -165,5 +191,34 @@ public class EmpresaCategoriaFragment extends Fragment {
         Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         resultLauncher.launch(intent);
+    }
+
+    private void ocultaTeclado(){
+        InputMethodManager inputMethodManager =
+                (InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(categoriaBinding.edtCategoria.getWindowToken()
+                ,InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    private void salvarImagemFirebase(){
+        StorageReference storageReference = FirebaseHelper.getStorageReference()
+                .child("imagens")
+                .child("categorias")
+                .child(categoria.getId() + "jpeg.");
+        UploadTask uploadTask = storageReference.putFile(Uri.parse(caminhoImagem));
+        uploadTask.addOnSuccessListener(taskSnapshot ->  storageReference.getDownloadUrl().addOnCompleteListener(task -> {
+
+                String urlImagem = task.getResult().toString();
+                categoria.setUrlimagem(urlImagem);
+                categoria.salvar();
+            Toast.makeText(getContext(), "PASSOU AQUI", Toast.LENGTH_SHORT).show();
+                categoria = null;
+                alertDialog.dismiss();
+                })).addOnFailureListener(e->{
+                    alertDialog.dismiss();
+                    Toast.makeText(getContext(),"Erro ao fazeer upload da imagem.",
+                            Toast.LENGTH_SHORT);
+        });
+
     }
 }
